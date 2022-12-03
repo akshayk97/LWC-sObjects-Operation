@@ -1,0 +1,53 @@
+<template>
+    <lightning-layout horizontal-align="center" multiple-rows="true">
+        <lightning-layout-item size="12">
+            <div class="outerBox">
+                <lightning-card variant="narrow" title="SObject LWC Actions" icon-name="standard:opportunity">
+                    <div class="center">
+                        <button class="slds-button slds-button_brand" onclick={openModal}>Operations in Objects</button>
+                    </div>   
+                </lightning-card>
+            </div>
+        </lightning-layout-item>
+    </lightning-layout>
+
+
+
+    <template if:true={popupOpen}>
+
+        <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01"
+            class="slds-modal slds-fade-in-open slds-modal_medium">
+            <div class="slds-modal__container">
+                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"  onclick={closeModal}>
+                    <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true" style="color: white;">
+                       X
+                    </svg>
+                    <span class="slds-assistive-text">Cancel and close</span>
+                </button>
+                <div class="slds-modal__header">
+                    <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Operations</h1>
+                </div>
+                <div class="slds-modal__content slds-p-around_medium contentHeight" id="modal-content-id-1">
+                <lightning-combobox
+                            name="Objects"
+                            label="Select"
+                            value={value}
+                            placeholder="Select"
+                            options={options}
+                            onchange={handleChange} >
+                </lightning-combobox>
+
+                <div class="dataTable">
+                    <c-show-data-table show-table={showTable} sobject-name = {objectName}></c-show-data-table>
+                </div>
+                </div>
+                <div class="slds-modal__footer">
+                    <button class="slds-button slds-button_neutral" aria-label="Cancel and close" onclick={closeModal} >Close</button>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+
+
+   </template>
+</template>
